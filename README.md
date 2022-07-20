@@ -32,6 +32,8 @@ int main(int argc, char** argv) {
     if (args["ignorecase"] == "true") {
         std::cout << "Ignore case flag was given" << std::endl;
     }
+
+    return 0;
 }
 ```
 
