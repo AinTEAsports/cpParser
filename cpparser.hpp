@@ -202,7 +202,7 @@ class Parser {
 
             // Filling the map so not given arguments have default value of ""
             for (Argument a: *argumentList) {
-                argsMap.insert(std::pair<std::string, std::string>(a.getArgumentName(), "true"));
+                argsMap.insert(std::pair<std::string, std::string>(a.getArgumentName(), ""));
             }
 
 
@@ -225,8 +225,6 @@ class Parser {
                         this->showHelp();
                         exit(1);
                     }
-
-
                 }
                 
                 // If '-h' or '--help' is in arguments, show help and exit
@@ -248,6 +246,10 @@ class Parser {
             shift(&argvalues);
 
             while (argvalues.size() != 0) {
+                if (!argvalues[0].rfind("-", 0) == 0) {
+                    shift(&argvalues);
+                }
+
                 for (Argument registeredArgument: *argumentList) {
                     if (argvalues[0] == registeredArgument.getShortFlag() || argvalues[0] == registeredArgument.getLongFlag()) {
                         switch (registeredArgument.getAction()) {
