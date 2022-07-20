@@ -169,7 +169,7 @@ class Parser {
 
 
         std::map<std::string, std::string> parseArgs(int argc, char** argv) {
-            // If arg count = 1 then there is only script name, so we just show help
+            // If arg count = 1 then there is only script name, so we just show help and exit
             if (argc == 1) {
                 std::cout << "Usage: " << argv[0] << " [OPTIONS...]  <ARGUMENTS...>" << "\n\n";
                 this->showHelp();
