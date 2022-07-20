@@ -2,7 +2,7 @@
 #include <string>
 #include <map>
 
-#include "cpparser.hpp"
+#include "cpparser.cpp"
 
 
 int main(int argc, char** argv) {
