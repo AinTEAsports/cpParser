@@ -240,7 +240,7 @@ class Parser {
                 
                 // If '-h' or '--help' is in arguments, show help and exit
                 if (argument == "-h" || argument == "--help") {
-                    std::cout << "Usage: " << argv[0] << " [OPTIONS...]  <ARGUMENTS...>" << "\n-----------------\n";
+                    std::cout << "Usage: " << argv[0] << " [OPTIONS...]  <ARGUMENTS...>" << "\n\n";
                     this->showHelp();
 
                     exit(0);
