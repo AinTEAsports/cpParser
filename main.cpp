@@ -14,9 +14,7 @@ int main(int argc, char** argv) {
         "Ignores case"
     );
 
-    try {
-        auto args = parser.parseArgs(argc, argv);
-    } catch (UnknownFlagException e) {
-        std::cout << "Unknown flag found" << std::endl;
-    }
+    auto args = parser.parseArgs(argc, argv);
+
+    return 0;
 }
