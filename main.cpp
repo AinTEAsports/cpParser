@@ -1,8 +1,22 @@
 #include <iostream>
+#include <vector>
+#include "cpparser.hpp"
 
 
-int main() {
-    std::cout << "I have a joke about programming but it only works on my computer";
+int main(int argc, char** argv) {
+    Parser parser("This is a test program");
 
-    return 0;
+    parser.addArgument(
+        "-i",
+        "--ignore-case",
+        "ignorecase",
+        Parser::NO_ACTION,
+        "Ignores case"
+    );
+
+    try {
+        auto args = parser.parseArgs(argc, argv);
+    } catch (UnknownFlagException e) {
+        std::cout << "Unknown flag found" << std::endl;
+    }
 }
