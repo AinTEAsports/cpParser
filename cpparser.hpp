@@ -180,6 +180,11 @@ class Parser {
             std::vector<std::string> argvalues = toVector(argv, argc);
             std::map<std::string, std::string> argsMap;
 
+            // Filling the map so not given arguments have default value of ""
+            for (Argument a: *argumentList) {
+                argsMap.insert(std::pair<std::string, std::string>(a.getArgumentName(), "true"));
+            }
+
 
             // Verifying if every flag in argv is valid
             for (std::string argument: argvalues) {
@@ -227,15 +232,16 @@ class Parser {
                     if (argvalues[0] == registeredArgument.getShortFlag() || argvalues[0] == registeredArgument.getLongFlag()) {
                         switch (registeredArgument.getAction()) {
                             case Parser::NO_ACTION:
-                                argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), getArgValue(&argvalues)));
+                                // argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), getArgValue(&argvalues)));
+                                argsMap[registeredArgument.getArgumentName()] = getArgValue(&argvalues);
                                 break;
                             case Parser::STORE_TRUE:
                                 shift(&argvalues);
-                                argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), "true"));
+                                argsMap[registeredArgument.getArgumentName()] = "true";
                                 break;
                             case Parser::STORE_FALSE:
                                 shift(&argvalues);
-                                argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), "false"));
+                                argsMap[registeredArgument.getArgumentName()] = "false";
                                 break;
                             default:
                                 printf("WTF ???\n");
