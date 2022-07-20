@@ -4,9 +4,9 @@ A Python argparse like C++ argument parser
 
 `STEPS :`
 
-- `1- Make the header accessible:` you just need to download `cpparser.hpp` into your current directory
+- `1- Make the header accessible:` you just need to download `cpparser.cpp` into your current directory
 
-- `2- Start coding:` it is as simple as that, there is documentation in every function/method in `cpparser.hpp`
+- `2- Start coding:` it is as simple as that, there is documentation in every function/method in `cpparser.cpp`
 
 - `3- Example:` here is a short example
 ```cpp
