@@ -5,6 +5,16 @@
 #include <cstring>
 
 
+
+std::string multiplyChar(std::string toMultiply, int multiplicator) {
+    std::string result = "";
+
+    for (int _ = 0; _ < multiplicator; _++) result += toMultiply;
+
+    return result;
+}
+
+
 template <typename T>
 void printArray(T * array, size_t arraySize) {
     std::cout << "[";
@@ -121,6 +131,8 @@ class Argument {
 
 class Parser {
     private:
+        bool throwError;
+
         std::string description;
         std::vector<Argument>* argumentList = new std::vector<Argument>();
 
@@ -142,14 +154,18 @@ class Parser {
         static const int STORE_FALSE = 2;
 
 
-        Parser(std::string help) {
+        Parser(std::string help, bool throwError = false) {
             this->description = help;
             this->addArgument("-h", "--help", "help", 0, "Shows this message");
+
+            this->throwError = throwError;
         }
 
 
         void showHelp() {
-            std::cout << description << "\n\n\n";
+            std::cout << description << "\n";
+            std::cout << multiplyChar("-", description.size()) << '\n';
+            std::cout << '\n';
 
             for (Argument argument: *argumentList) {
                 std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]" << "\t\t" << argument.getDescription() << '\n';
@@ -181,10 +197,19 @@ class Parser {
 
 
                 if (!this->isArgumentRegistered(argument)) {
-                    char errorMessage[] = "Flag '%s' is not valid";
-                    sprintf(errorMessage, errorMessage, argument);
+                    if (this->throwError) {
+                        char errorMessage[] = "Flag '%s' is not valid";
+                        sprintf(errorMessage, errorMessage, argument);
 
-                    throw UnknownFlagException(errorMessage);
+                        throw UnknownFlagException(errorMessage);
+                    } else {
+                        std::cout << argv[0] << ": unknown flag ('" << argument << "') was found\n\n";
+
+                        this->showHelp();
+                        exit(1);
+                    }
+
+
                 }
                 
                 // If '-h' or '--help' is in arguments, show help and exit
