@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <cstring>
 
 
 
@@ -41,38 +40,6 @@ std::string multiplyChar(std::string toMultiply, int multiplicator) {
 }
 
 
-template <typename T>
-void printArray(T * array, size_t arraySize) {
-    std::cout << "[";
-
-    for (int i = 0; i < arraySize; i++) {
-        std::cout << array[i];
-
-        if (i < arraySize-1) {
-            std::cout << ", ";
-        }
-    }
-
-    std::cout << "]" << std::endl;
-}
-
-
-template <typename T>
-void printArray(std::vector<T> vector) {
-    std::cout << "[";
-
-    for (int i = 0; i < vector.size(); i++) {
-        std::cout << vector[i];
-
-        if (i < vector.size()-1) {
-            std::cout << ", ";
-        }
-    }
-
-    std::cout << "]" << std::endl;
-}
-
-
 std::vector<std::string> toVector(char** array, int arraySize) {
     std::string foo;
     std::vector<std::string> returnValue;
@@ -82,18 +49,6 @@ std::vector<std::string> toVector(char** array, int arraySize) {
     }
 
     return returnValue;
-}
-
-
-template <typename T>
-bool contains(std::vector<T> vector, T toFind) {
-    for (T value: vector) {
-        if (value == toFind) {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 
@@ -245,8 +200,6 @@ class Parser {
 
                     exit(0);
                 }
-
-
             }
 
 
@@ -258,15 +211,9 @@ class Parser {
             // The first element is the script name, it is not a flag so we delete it
             shift(&argvalues);
 
-
-            // std::string argvalue;
-
             while (argvalues.size() != 0) {
                 for (Argument registeredArgument: *argumentList) {
                     if (argvalues[0] == registeredArgument.getShortFlag() || argvalues[0] == registeredArgument.getLongFlag()) {
-                        // argvalue = getArgValue(&argvalues);
-                        // std::cout << argvalues[0] << " ->" << getArgValue(&argvalues) << '\n';
-
                         switch (registeredArgument.getAction()) {
                             case Parser::NO_ACTION:
                                 argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), getArgValue(&argvalues)));
