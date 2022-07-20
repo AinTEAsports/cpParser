@@ -6,6 +6,32 @@
 
 
 
+template <typename T>
+void shift(std::vector<T>* vector) {
+    vector->erase(vector->begin());
+}
+
+
+std::string getArgValue(std::vector<std::string>* argsVector) {
+    std::string args = "";
+
+    // The first element will be the flag so we remove it to go into while statement
+    shift(argsVector);
+
+    // While first value does not starts with '-'
+    while (!(*argsVector)[0].rfind("-", 0) == 0) {
+        args += (*argsVector)[0] + " ";
+        shift(argsVector);
+
+        if (argsVector->size() == 0) {
+            break;
+        }
+    }
+
+    return args;
+}
+
+
 std::string multiplyChar(std::string toMultiply, int multiplicator) {
     std::string result = "";
 
@@ -90,7 +116,7 @@ class Argument {
         std::string shortFlag;
         std::string longFlag;
         std::string argumentName;
-        std::string action;
+        int action;
         std::string description;
 
     public:
@@ -118,7 +144,7 @@ class Argument {
         }
 
 
-        std::string getAction() {
+        int getAction() {
             return this->action;
         }
 
@@ -228,6 +254,37 @@ class Parser {
             // Getting arguments
             // here use shift until first argument starts with '-'
             // same algorithm as in bash script where you manually parsearguments
+
+            // The first element is the script name, it is not a flag so we delete it
+            shift(&argvalues);
+
+
+            // std::string argvalue;
+
+            while (argvalues.size() != 0) {
+                for (Argument registeredArgument: *argumentList) {
+                    if (argvalues[0] == registeredArgument.getShortFlag() || argvalues[0] == registeredArgument.getLongFlag()) {
+                        // argvalue = getArgValue(&argvalues);
+                        // std::cout << argvalues[0] << " ->" << getArgValue(&argvalues) << '\n';
+
+                        switch (registeredArgument.getAction()) {
+                            case Parser::NO_ACTION:
+                                argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), getArgValue(&argvalues)));
+                                break;
+                            case Parser::STORE_TRUE:
+                                shift(&argvalues);
+                                argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), "true"));
+                                break;
+                            case Parser::STORE_FALSE:
+                                shift(&argvalues);
+                                argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), "false"));
+                                break;
+                            default:
+                                printf("WTF ???\n");
+                        }
+                    }
+                }
+            }
 
 
             return argsMap;
