@@ -5,6 +5,9 @@
 
 
 
+// TODO : do function documentation, class and constructor documentation
+
+
 template <typename T>
 void shift(std::vector<T>* vector) {
     vector->erase(vector->begin());
@@ -166,6 +169,14 @@ class Parser {
 
 
         std::map<std::string, std::string> parseArgs(int argc, char** argv) {
+            // If arg count = 1 then there is only script name, so we just show help
+            if (argc == 1) {
+                std::cout << "Usage: " << argv[0] << " [OPTIONS...]  <ARGUMENTS...>" << "\n\n";
+                this->showHelp();
+                exit(0);
+            }
+
+
             std::vector<std::string> argvalues = toVector(argv, argc);
             std::map<std::string, std::string> argsMap;
 
