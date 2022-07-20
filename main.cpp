@@ -1,20 +1,26 @@
 #include <iostream>
-#include <vector>
+#include <string>
+#include <map>
+
 #include "cpparser.hpp"
 
 
 int main(int argc, char** argv) {
-    Parser parser("This is a test program");
+    Parser parser("A test CLI tool");
 
     parser.addArgument(
         "-i",
         "--ignore-case",
         "ignorecase",
-        Parser::NO_ACTION,
+        Parser::STORE_TRUE,
         "Ignores case"
     );
 
-    auto args = parser.parseArgs(argc, argv);
+    std::map<std::string, std::string> args = parser.parseArgs(argc, argv);
+
+    if (args["ignorecase"] == "true") {
+        std::cout << "Ignore case flag was given" << std::endl;
+    }
 
     return 0;
 }
