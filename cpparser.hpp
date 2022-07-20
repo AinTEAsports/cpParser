@@ -69,6 +69,19 @@ class UnknownFlagException : public std::exception {
 };
 
 
+class InvalidFlagException : public std::exception {
+    private:
+        char* message;
+    
+    public:
+        InvalidFlagException(char* errorMessage) : message(errorMessage) {this->message = errorMessage;};
+
+        char* what() {
+            return this->message;
+        }
+};
+
+
 class Argument {
     private:
         std::string shortFlag;
@@ -163,6 +176,13 @@ class Parser {
 
 
         void addArgument(std::string shortFlag, std::string longFlag, std::string  argumentName, int action = 0, std::string description = "") {
+            if (!shortFlag.rfind("-", 0) == 0 || !longFlag.rfind("-", 0) == 0) {
+                char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
+                throw InvalidFlagException(error);
+
+                exit(0);
+            }
+
             Argument newArgument(shortFlag, longFlag, argumentName, action, description);
             argumentList->push_back(newArgument);
         }
