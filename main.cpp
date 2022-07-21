@@ -1,25 +1,65 @@
 #include <iostream>
 #include <string>
-#include <map>
+#include <cpr/cpr.h>
 
 #include "cpparser.cpp"
 
 
+void resumeUrl(std::string url) {
+    cpr::Response response = cpr::Get(cpr::Url{url});
+
+    std::cout << "URL: " << url << '\n';
+    std::cout << "Reason: " << response.reason << '\n';
+    std::cout << "Redirect count: " << response.redirect_count << '\n';
+    std::cout << "Status code: " << response.status_code << '\n';
+    std::cout << "Status line: " << response.status_line << '\n';
+    std::cout << "Elapsed: " << response.elapsed << '\n';
+}
+
+
+void shortResumeUrl(std::string url) {
+    cpr::Response response = cpr::Get(cpr::Url{url});
+
+    std::cout << "URL: " << url << '\n';
+    std::cout << "Status code: " << response.status_code << '\n';
+    std::cout << "Elapsed: " << response.elapsed << '\n';
+}
+
+
+
 int main(int argc, char** argv) {
-    Parser parser("A test CLI tool");
+    Parser parser("A CLI tool that get informations about URLs");
 
     parser.addArgument(
-        "-i",
-        "--ignore-case",
-        "ignorecase",
-        Parser::STORE_TRUE,
-        "Ignores case"
+        "-u",
+        "--urls",
+        "urlList",
+        Parser::NO_ACTION,
+        "The URLs you want to check"
     );
 
-    std::map<std::string, std::string> args = parser.parseArgs(argc, argv);
+    parser.addArgument(
+        "-s",
+        "--short-version",
+        "shortversion",
+        Parser::STORE_TRUE,
+        "Option to put if you want short resume"
+    );
 
-    if (args["ignorecase"] == "true") {
-        std::cout << "Ignore case flag was given" << std::endl;
+    auto args = parser.parseArgs(argc, argv);
+
+    std::vector<std::string> urls = cputils::split(args["urlList"], ' ');
+
+    for (std::string url: urls) {
+        if (args["shortversion"] == "true") {
+            shortResumeUrl(url);
+
+            std::cout << "\n----- ----- -----\n\n";
+        } else {
+            resumeUrl(url);
+            
+            std::cout << "\n----- ----- -----\n\n";
+        }
     }
 
     return 0;
