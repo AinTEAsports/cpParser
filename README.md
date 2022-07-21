@@ -37,6 +37,7 @@ int main(int argc, char** argv) {
     return 0;
 }
 ```
+Also, if you want an even more complex example, check `main.cpp` (and if you want to test it, don't forget to compile it with flag `-lcpr`)
 
 - `4- Problems`
 If you encounter any problems, contact me on Discord: `AinTea#0519`
