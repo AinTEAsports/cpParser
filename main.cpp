@@ -53,13 +53,11 @@ int main(int argc, char** argv) {
     for (std::string url: urls) {
         if (args["shortversion"] == "true") {
             shortResumeUrl(url);
-
-            std::cout << "\n----- ----- -----\n\n";
         } else {
             resumeUrl(url);
-            
-            std::cout << "\n----- ----- -----\n\n";
         }
+
+        std::cout << "\n----- ----- -----\n\n";
     }
 
     return 0;
