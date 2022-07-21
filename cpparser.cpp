@@ -8,9 +8,8 @@
 // TODO : do function documentation, class and constructor documentation
 
 
-namespace ca {
-    // No option to get a vector if you want to store multiple values, so use this
-    std::vector<std::string> split(std::string string, char separator = ' ') {
+namespace cputils {
+    std::vector<std::string> split(std::string string, char separator) {
         std::string stringPart = "";
         std::vector<std::string> splittedString = {};
 
@@ -26,53 +25,66 @@ namespace ca {
 
         return splittedString;
     }
-}
 
 
-template <typename T>
-void shift(std::vector<T>* vector) {
-    vector->erase(vector->begin());
-}
 
 
-std::string getArgValue(std::vector<std::string>* argsVector) {
-    std::string args = "";
+    std::string removeLastChar(std::string string) {
+        std::string result = "";
 
-    // The first element will be the flag so we remove it to go into while statement
-    shift(argsVector);
+        for (int i = 0; i < string.size()-1; i++) {
+            result += string[i];
+        }
 
-    // While first value does not starts with '-'
-    while (!(*argsVector)[0].rfind("-", 0) == 0) {
-        args += (*argsVector)[0] + " ";
+        return result;
+    }
+
+
+    template <typename T>
+    void shift(std::vector<T>* vector) {
+        vector->erase(vector->begin());
+    }
+
+
+    std::string getArgValue(std::vector<std::string>* argsVector) {
+        std::string args = "";
+
+        // The first element will be the flag so we remove it to go into while statement
         shift(argsVector);
 
-        if (argsVector->size() == 0) {
-            break;
+        // While first value does not starts with '-'
+        while (!(*argsVector)[0].rfind("-", 0) == 0) {
+            args += (*argsVector)[0] + " ";
+            shift(argsVector);
+
+            if (argsVector->size() == 0) {
+                break;
+            }
         }
+
+        return args;
     }
 
-    return args;
-}
 
+    std::string multiplyChar(std::string toMultiply, int multiplicator) {
+        std::string result = "";
 
-std::string multiplyChar(std::string toMultiply, int multiplicator) {
-    std::string result = "";
+        for (int _ = 0; _ < multiplicator; _++) result += toMultiply;
 
-    for (int _ = 0; _ < multiplicator; _++) result += toMultiply;
-
-    return result;
-}
-
-
-std::vector<std::string> toVector(char** array, int arraySize) {
-    std::string foo;
-    std::vector<std::string> returnValue;
-
-    for (int i = 0; i < arraySize; i++) {
-        returnValue.push_back(std::string(array[i]));
+        return result;
     }
 
-    return returnValue;
+
+    std::vector<std::string> toVector(char** array, int arraySize) {
+        std::string foo;
+        std::vector<std::string> returnValue;
+
+        for (int i = 0; i < arraySize; i++) {
+            returnValue.push_back(std::string(array[i]));
+        }
+
+        return returnValue;
+    }
 }
 
 
@@ -182,7 +194,7 @@ class Parser {
 
         void showHelp() {
             std::cout << description << "\n";
-            std::cout << multiplyChar("-", description.size()) << '\n';
+            std::cout << cputils::multiplyChar("-", description.size()) << '\n';
             std::cout << '\n';
 
             for (Argument argument: *argumentList) {
@@ -218,7 +230,7 @@ class Parser {
             }
 
 
-            std::vector<std::string> argvalues = toVector(argv, argc);
+            std::vector<std::string> argvalues = cputils::toVector(argv, argc);
             std::map<std::string, std::string> argsMap;
 
             // Filling the map so not given arguments have default value of ""
@@ -264,25 +276,27 @@ class Parser {
             // same algorithm as in bash script where you manually parsearguments
 
             // The first element is the script name, it is not a flag so we delete it
-            shift(&argvalues);
+            cputils::shift(&argvalues);
 
             while (argvalues.size() != 0) {
                 if (!argvalues[0].rfind("-", 0) == 0) {
-                    shift(&argvalues);
+                    cputils::shift(&argvalues);
                 }
 
                 for (Argument registeredArgument: *argumentList) {
                     if (argvalues[0] == registeredArgument.getShortFlag() || argvalues[0] == registeredArgument.getLongFlag()) {
                         switch (registeredArgument.getAction()) {
                             case Parser::NO_ACTION:
-                                argsMap[registeredArgument.getArgumentName()] = getArgValue(&argvalues);
+                                // argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), getArgValue(&argvalues)));
+                                argsMap[registeredArgument.getArgumentName()] = cputils::getArgValue(&argvalues);
+                                // argsMap[registeredArgument.getArgumentName()] = removeLastChar(argsMap[registeredArgument.getArgumentName()]);
                                 break;
                             case Parser::STORE_TRUE:
-                                shift(&argvalues);
+                                cputils::shift(&argvalues);
                                 argsMap[registeredArgument.getArgumentName()] = "true";
                                 break;
                             case Parser::STORE_FALSE:
-                                shift(&argvalues);
+                                cputils::shift(&argvalues);
                                 argsMap[registeredArgument.getArgumentName()] = "false";
                                 break;
                             default:
