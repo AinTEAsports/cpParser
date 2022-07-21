@@ -85,34 +85,33 @@ namespace cputils {
 
         return returnValue;
     }
+
+
+    class UnknownFlagException : public std::exception {
+        private:
+            char* message;
+
+        public:
+            UnknownFlagException(char* errorMessage) : message(errorMessage) {};
+
+            char* what(std::string flagName) {
+                return this->message;
+            }
+    };
+
+
+    class InvalidFlagException : public std::exception {
+        private:
+            char* message;
+        
+        public:
+            InvalidFlagException(char* errorMessage) : message(errorMessage) {this->message = errorMessage;};
+
+            char* what() {
+                return this->message;
+            }
+    };
 }
-
-
-
-class UnknownFlagException : public std::exception {
-    private:
-        char* message;
-
-    public:
-        UnknownFlagException(char* errorMessage) : message(errorMessage) {};
-
-        char* what(std::string flagName) {
-            return this->message;
-        }
-};
-
-
-class InvalidFlagException : public std::exception {
-    private:
-        char* message;
-    
-    public:
-        InvalidFlagException(char* errorMessage) : message(errorMessage) {this->message = errorMessage;};
-
-        char* what() {
-            return this->message;
-        }
-};
 
 
 class Argument {
@@ -211,7 +210,7 @@ class Parser {
         void addArgument(std::string shortFlag, std::string longFlag, std::string  argumentName, int action = 0, std::string description = "") {
             if (!shortFlag.rfind("-", 0) == 0 || !longFlag.rfind("-", 0) == 0) {
                 char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
-                throw InvalidFlagException(error);
+                throw std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
                 exit(0);
             }
@@ -248,10 +247,7 @@ class Parser {
 
                 if (!this->isArgumentRegistered(argument)) {
                     if (this->throwError) {
-                        char errorMessage[] = "Flag '%s' is not valid";
-                        sprintf(errorMessage, errorMessage, argument);
-
-                        throw UnknownFlagException(errorMessage);
+                        throw std::runtime_error("Flag '" + argument + "' is not valid");
                     } else {
                         std::cout << argv[0] << ": unknown flag ('" << argument << "') was found\n\n";
 
