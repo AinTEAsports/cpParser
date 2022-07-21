@@ -7,11 +7,11 @@ A Python argparse like C++ argument parser
 - `1- Make the header accessible:`
   - `Solution 1:` you just need to download `cpparser.cpp` into your current directory
   - `Solution 2:` open your terminal in which directory you have your `main.cpp` and do <br>`curl https://raw.githubusercontent.com/AinTEAsports/cpParser/main/cpparser.cpp > ./cpparser.cpp`
-  - 
+
 <br/><br>
 
 - `2- Start coding:` it is as simple as that, there is documentation in every function/method in `cpparser.cpp`
-- 
+
 <br/><br>
 
 - `3- Example:` here is a short example
