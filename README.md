@@ -11,6 +11,7 @@ A Python argparse like C++ argument parser
 - `2- Start coding:` it is as simple as that, there is documentation in every function/method in `cpparser.cpp`
 <br/><br>
 - `3- Example:` here is a short example
+
 ```cpp
 #include <iostream>
 #include <string>
