@@ -8,6 +8,27 @@
 // TODO : do function documentation, class and constructor documentation
 
 
+namespace ca {
+    // No option to get a vector if you want to store multiple values, so use this
+    std::vector<std::string> split(std::string string, char separator = ' ') {
+        std::string stringPart = "";
+        std::vector<std::string> splittedString = {};
+
+        for (int i = 0; i < string.size(); i++) {
+            if (string[i] == separator) {
+                splittedString.push_back(stringPart);
+                stringPart = "";
+                continue;
+            }
+
+            stringPart += string[i];
+        }
+
+        return splittedString;
+    }
+}
+
+
 template <typename T>
 void shift(std::vector<T>* vector) {
     vector->erase(vector->begin());
@@ -254,7 +275,6 @@ class Parser {
                     if (argvalues[0] == registeredArgument.getShortFlag() || argvalues[0] == registeredArgument.getLongFlag()) {
                         switch (registeredArgument.getAction()) {
                             case Parser::NO_ACTION:
-                                // argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), getArgValue(&argvalues)));
                                 argsMap[registeredArgument.getArgumentName()] = getArgValue(&argvalues);
                                 break;
                             case Parser::STORE_TRUE:
