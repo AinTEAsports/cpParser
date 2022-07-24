@@ -8,6 +8,11 @@
 // TODO : do function documentation, class and constructor documentation
 
 
+// Due to some C++ restrictions (that are, I could say, part of the core of the language itself)
+// I made some functions and classes inside this namespace to make easier the use of your argument values
+
+// In every function/class I will write why I put his here, and an example of how and why to use it
+// TODO : do what the comment above this one says
 namespace cputils {
 	std::string strip(std::string string) {
         if (string.size() == 0) {
