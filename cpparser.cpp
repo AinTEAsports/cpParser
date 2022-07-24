@@ -9,6 +9,40 @@
 
 
 namespace cputils {
+	std::string strip(std::string string) {
+        if (string.size() == 0) {
+            return "";
+        }
+
+
+		std::vector<char> toStrip = {};
+        std::string result = "";
+
+		// We copy the string content into toStrip
+		for (int i = 0; i < string.size(); i++) {
+			toStrip.push_back(string[i]);
+		}
+
+		
+		// We remove every space in front of the string
+		while (toStrip[0] == ' ') {
+			toStrip.erase(toStrip.begin());
+		}
+
+		while (toStrip[toStrip.size()-1] == ' ') {
+            toStrip.pop_back();
+        }
+
+
+        // We join the char
+        for (char character: toStrip) {
+            result += character;
+        }
+
+        return result;
+	}
+
+
     std::vector<std::string> split(std::string string, char separator) {
         std::string stringPart = "";
         std::vector<std::string> splittedString = {};
