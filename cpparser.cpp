@@ -318,7 +318,7 @@ class Parser {
                         switch (registeredArgument.getAction()) {
                             case Parser::NO_ACTION:
                                 // argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), getArgValue(&argvalues)));
-                                argsMap[registeredArgument.getArgumentName()] = cputils::getArgValue(&argvalues);
+                                argsMap[registeredArgument.getArgumentName()] = cputils::strip(cputils::getArgValue(&argvalues));
                                 // argsMap[registeredArgument.getArgumentName()] = removeLastChar(argsMap[registeredArgument.getArgumentName()]);
                                 break;
                             case Parser::STORE_TRUE:
