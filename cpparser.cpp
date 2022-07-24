@@ -43,7 +43,7 @@ namespace cputils {
 	}
 
 
-    std::vector<std::string> split(std::string string, char separator) {
+    std::vector<std::string> split(std::string string, char separator = ' ') {
         std::string stringPart = "";
         std::vector<std::string> splittedString = {};
 
