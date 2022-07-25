@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 
 
@@ -197,6 +198,15 @@ class Argument {
 };
 
 
+
+struct ArgumentValue {
+    // The values it could take
+    std::string String = "";
+    std::vector<std::string> Vector = {};
+    bool Bool;
+};
+
+
 class Parser {
     private:
         bool throwError;
@@ -217,9 +227,17 @@ class Parser {
 
 
     public:
-        static const int NO_ACTION = 0;
-        static const int STORE_TRUE = 1;
-        static const int STORE_FALSE = 2;
+        static const int STORE_ONE_VALUE = 0;
+        static const int STORE_MULTIPLE_VALUES = 1;
+        static const int STORE_TRUE = 2;
+        static const int STORE_FALSE = 3;
+
+        const std::vector<int> POSSIBLE_ACTIONS = {
+            Parser::STORE_ONE_VALUE,
+            Parser::STORE_MULTIPLE_VALUES,
+            Parser::STORE_TRUE,
+            Parser::STORE_FALSE,
+        };
 
 
         Parser(std::string help, bool throwError = false) {
@@ -254,12 +272,18 @@ class Parser {
                 exit(0);
             }
 
+            if (std::count(this->POSSIBLE_ACTIONS.begin(), this->POSSIBLE_ACTIONS.end(), action) == 0) {
+                throw std::invalid_argument("The action you gave for argument named '" + argumentName + "' does not exists");
+
+                exit(0);
+            }
+
             Argument newArgument(shortFlag, longFlag, argumentName, action, description);
             argumentList->push_back(newArgument);
         }
 
 
-        std::map<std::string, std::string> parseArgs(int argc, char** argv) {
+        std::map<std::string, ArgumentValue> parseArgs(int argc, char** argv) {
             // If arg count = 1 then there is only script name, so we just show help and exit
             if (argc == 1) {
                 std::cout << "Usage: " << argv[0] << " [OPTIONS...]  <ARGUMENTS...>" << "\n\n";
@@ -269,11 +293,25 @@ class Parser {
 
 
             std::vector<std::string> argvalues = cputils::toVector(argv, argc);
-            std::map<std::string, std::string> argsMap;
+            std::map<std::string, ArgumentValue> argsMap;
 
             // Filling the map so not given arguments have default value of ""
             for (Argument a: *argumentList) {
-                argsMap.insert(std::pair<std::string, std::string>(a.getArgumentName(), ""));
+                switch (a.getAction()) {
+                    case Parser::STORE_ONE_VALUE:
+                        argsMap.insert(std::pair<std::string, ArgumentValue>(a.getArgumentName(), ArgumentValue{"", {}, false}));
+                        break;
+                    case Parser::STORE_MULTIPLE_VALUES:
+                        argsMap.insert(std::pair<std::string, ArgumentValue>(a.getArgumentName(), ArgumentValue{"", {}, false}));
+                        break;
+                    case Parser::STORE_TRUE:
+                        argsMap.insert(std::pair<std::string, ArgumentValue>(a.getArgumentName(), ArgumentValue{"", {}, false}));
+                        break;
+                    case Parser::STORE_FALSE:
+                        argsMap.insert(std::pair<std::string, ArgumentValue>(a.getArgumentName(), ArgumentValue{"", {}, true}));
+                        break;
+                }
+
             }
 
 
@@ -321,18 +359,22 @@ class Parser {
                 for (Argument registeredArgument: *argumentList) {
                     if (argvalues[0] == registeredArgument.getShortFlag() || argvalues[0] == registeredArgument.getLongFlag()) {
                         switch (registeredArgument.getAction()) {
-                            case Parser::NO_ACTION:
+                            case Parser::STORE_ONE_VALUE:
                                 // argsMap.insert(std::pair<std::string, std::string>(registeredArgument.getArgumentName(), getArgValue(&argvalues)));
-                                argsMap[registeredArgument.getArgumentName()] = cputils::strip(cputils::getArgValue(&argvalues));
+                                argsMap[registeredArgument.getArgumentName()].String = cputils::strip(cputils::getArgValue(&argvalues));
                                 // argsMap[registeredArgument.getArgumentName()] = removeLastChar(argsMap[registeredArgument.getArgumentName()]);
+                                break;
+                            case Parser::STORE_MULTIPLE_VALUES:
+                                // argsMap[registeredArgument.getArgumentName()].Vector = cputils::split(cputils::strip(cputils::getArgValue(&argvalues)));
+                                argsMap[registeredArgument.getArgumentName()].Vector = cputils::split(cputils::getArgValue(&argvalues));
                                 break;
                             case Parser::STORE_TRUE:
                                 cputils::shift(&argvalues);
-                                argsMap[registeredArgument.getArgumentName()] = "true";
+                                argsMap[registeredArgument.getArgumentName()].Bool = true;
                                 break;
                             case Parser::STORE_FALSE:
                                 cputils::shift(&argvalues);
-                                argsMap[registeredArgument.getArgumentName()] = "false";
+                                argsMap[registeredArgument.getArgumentName()].Bool = false;
                                 break;
                             default:
                                 printf("WTF ???\n");
