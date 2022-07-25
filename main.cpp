@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
         "-u",
         "--urls",
         "urlList",
-        Parser::NO_ACTION,
+        Parser::STORE_MULTIPLE_VALUES,
         "The URLs you want to check"
     );
 
@@ -48,10 +48,9 @@ int main(int argc, char** argv) {
 
     auto args = parser.parseArgs(argc, argv);
 
-    std::vector<std::string> urls = cputils::split(args["urlList"], ' ');
 
-    for (std::string url: urls) {
-        if (args["shortversion"] == "true") {
+    for (std::string url: args["urlList"].Vector) {
+        if (args["shortversion"].Bool) {
             shortResumeUrl(url);
         } else {
             resumeUrl(url);
