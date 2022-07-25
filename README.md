@@ -33,9 +33,9 @@ int main(int argc, char** argv) {
         "Ignores case"
     );
 
-    std::map<std::string, std::string> args = parser.parseArgs(argc, argv);
+    auto args = parser.parseArgs(argc, argv);
 
-    if (args["ignorecase"] == "true") {
+    if (args["ignorecase"].Bool == true) {
         std::cout << "Ignore case flag was given" << std::endl;
     }
 
