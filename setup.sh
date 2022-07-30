@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NAME="cpparser"
-LIBRARY_NAME="lib${LIBRARY_NAME}.a"
+LIBRARY_NAME="lib${NAME}.a"
 
 
 function main() {
