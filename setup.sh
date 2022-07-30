@@ -5,7 +5,9 @@ LIBRARY_NAME="lib${NAME}.a"
 
 
 function main() {
-    mkdir ./lib
+    if [[ ! -d lib ]]; then
+        mkdir ./lib
+    fi
 
     g++ -c ./cpparser.cpp
     ar cr "${LIBRARY_NAME}" *.o
