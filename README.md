@@ -1,4 +1,5 @@
 #<a name="installation-section"></a> Installation
+
 To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
 chmod +x setup.sh && ./setup.sh
