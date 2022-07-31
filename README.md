@@ -105,10 +105,28 @@ int main(int argc, char** argv) {
 **Each argument type has an example in [example](#example-section) section** <br></br>
 
 There are 4 argument types (`Default`  means the value when the argument is not called) :
-* `Parser::STORE_ONE_VALUE`, accessible with `args["argname"].String`, has type `std::string`. Default to `""`.
-* `Parser::STORE_MULTIPLE_VALUES`, accessible with `args["argname"].Vector`, has type `std::vector<std::string>`. Default to `{}`.
-* `Parser::STORE_TRUE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `false`.
-* `Parser::STORE_FALSE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `true`.
+* `Parser::STORE_ONE_VALUE` :
+  - Accessible by: `args["argname"].String`
+  - Type: `std::string`
+  - Default to: `""`.
+<br>
+
+* `Parser::STORE_MULTIPLE_VALUES`
+  - Accessible by: `args["argname"].Vector`
+  - Type: `std::vector<std::string>`
+  - Default to: `{}`.
+<br>
+
+* `Parser::STORE_TRUE`
+  - Accessible by: `args["argname"].Bool`
+  - Has type: `bool`
+  - Default to: `false`.
+<br>
+
+* `Parser::STORE_FALSE`
+  - Accessible by `args["argname"].Bool`
+  - Type: `bool`
+  - Default to: `true`
 
 
 # <a name="problems-section"></a> Problems
