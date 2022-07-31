@@ -1,7 +1,10 @@
 # <a name="index-section"></a> Index
 Here is a list of what you'll find in this `README.md` :
-* 
-
+- [<a name="index-section"></a> Index](#-index)
+- [<a name="installation-section"></a> Installation](#-installation)
+- [<a name="example-section"></a> Example](#-example)
+- [<a name="documentation-section"></a> Documentation](#-documentation)
+- [<a name="problems-section"></a> Problems](#-problems)
 
 # <a name="installation-section"></a> Installation
 To `compile` the library, use `setup.sh` by doing in your terminal :
