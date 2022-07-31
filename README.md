@@ -2,8 +2,8 @@
 Here is a list of what you'll find in this `README.md` :
 * [Installation guide](#installation-section)
 * [Code examples](#example-section)
-* [Documentation](#-documentation-section)
-* [Report problems](#-problems-section)
+* [Documentation](#documentation-section)
+* [Report problems](#problems-section)
 <br></br>
 
 # <a name="installation-section"></a> Installation
