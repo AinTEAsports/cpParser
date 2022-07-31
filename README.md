@@ -97,8 +97,9 @@ int main(int argc, char** argv) {
 }
 ```
 # Documentation
-#<a name="documentation-section"></a>
-**Each argument type has an example in [Example](#example-section) part**
+<a name="documentation-section"></a>
+
+**Each argument type has an example in [example](#example-section) section**
 
 There are 4 argument types (`Default`  means the value when the argument is not called) :
 * `Parser::STORE_ONE_VALUE`, accessible with `args["argname"].String`, has type `std::string`. Default to `""`.
@@ -106,5 +107,5 @@ There are 4 argument types (`Default`  means the value when the argument is not 
 * `Parser::STORE_TRUE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `false`.
 * `Parser::STORE_FALSE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `true`.
 # Problems
-#<a name="problems-section"></a>
+<a name="problems-section"></a>
 If you had any problem with compiling/using the library, or if you have any suggestions, please contact `AinTea#0519` on <a href="https://discord.com">Discord</a>
