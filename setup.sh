@@ -3,7 +3,6 @@
 NAME="cpparser"
 LIBRARY_NAME="lib${NAME}.a"
 
-
 function main() {
     if [[ ! -d lib ]]; then
         mkdir ./lib
