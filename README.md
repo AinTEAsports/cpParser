@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 
     auto args = parser.parseArgs(argc, argv);
 
-    std::cout << "Your name is " << args["name"] << std::endl;
+    std::cout << "Your name is " << args["name"].String << std::endl;
 
     return 0;
 }
@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
 
     auto args = parser.parseArgs(argc, argv);
 
-    for (std::string url: args["urlList"]) {
+    for (std::string url: args["urlList"].Vector) {
         std::cout << url << std::endl;
     }
 
