@@ -1,10 +1,12 @@
-#<a name="installation-section"></a> Installation
+#<a name="installation-section"></a>
+# Installation
 
 To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
 chmod +x setup.sh && ./setup.sh
 ```
-#<a name="example-section"></a> Example
+#<a name="example-section"></a>
+# Example
 Here are 4 simple example of how works the `cpParser` library, with each argument type :
 ```cpp
 #include <iostream>
@@ -93,7 +95,8 @@ int main(int argc, char** argv) {
     return 0;
 }
 ```
-#<a name="documentation-section"></a> Documentation
+#<a name="documentation-section"></a>
+# Documentation
 **Each argument type has an example in [Example](#example-section) part**
 
 There are 4 argument types (`Default`  means the value when the argument is not called) :
@@ -101,5 +104,6 @@ There are 4 argument types (`Default`  means the value when the argument is not 
 * `Parser::STORE_MULTIPLE_VALUES`, accessible with `args["argname"].Vector`, has type `std::vector<std::string>`. Default to `{}`.
 * `Parser::STORE_TRUE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `false`.
 * `Parser::STORE_FALSE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `true`.
-#<a name="problems-section"></a> Problems
+#<a name="problems-section"></a>
+# Problems
 If you had any problem with compiling/using the library, or if you have any suggestions, please contact `AinTea#0519` on <a href="https://discord.com">Discord</a>
