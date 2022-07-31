@@ -40,5 +40,4 @@ int main(int argc, char** argv) {
 ```
 # Documentation
 # Problems
----
 If you had any problem with compiling/using the library, or if you have any suggestions, please contact `AinTea#0519` on <a href="https://discord.com">Discord</a>
