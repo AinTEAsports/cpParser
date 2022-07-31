@@ -5,8 +5,8 @@ To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
 chmod +x setup.sh && ./setup.sh
 ```
-# Example
 <a name="example-section"></a>
+# Example
 
 Here are 4 simple example of how works the `cpParser` library, with each argument type :
 ```cpp
