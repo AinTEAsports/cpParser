@@ -107,26 +107,26 @@ int main(int argc, char** argv) {
 There are 4 argument types (`Default`  means the value when the argument is not called) :
 * `Parser::STORE_ONE_VALUE` :
   - **Accessible by:** `args["argname"].String`
-  - Type: `std::string`
-  - Default to: `""`.
+  - **Type:** `std::string`
+  - **Default to:** `""`.
 <br>
 
 * `Parser::STORE_MULTIPLE_VALUES`
-  - Accessible by: `args["argname"].Vector`
-  - Type: `std::vector<std::string>`
-  - Default to: `{}`.
+  - **Accessible by:** `args["argname"].Vector`
+  - **Type:** `std::vector<std::string>`
+  - **Default to:** `{}`.
 <br>
 
 * `Parser::STORE_TRUE`
-  - Accessible by: `args["argname"].Bool`
-  - Has type: `bool`
-  - Default to: `false`.
+  - **Accessible by:** `args["argname"].Bool`
+  - **Has type:** `bool`
+  - **Default to:** `false`.
 <br>
 
 * `Parser::STORE_FALSE`
-  - Accessible by `args["argname"].Bool`
-  - Type: `bool`
-  - Default to: `true`
+  - **Accessible by:** `args["argname"].Bool`
+  - **Type:** `bool`
+  - **Default to:** `true`
 
 
 # <a name="problems-section"></a> Problems
