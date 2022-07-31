@@ -1,23 +1,15 @@
-# cpParser
-A Python argparse like C++ argument parser
+# Installation
+---
+To `compile` the library, use `setup.sh` by doing in your terminal :
+```sh
+chmod +x setup.sh && ./setup.sh
+```
 
+<br>
 
-
-# DUE TO RECENT CHANGES, THIS README FILE IS NOT ANYMORE WHAT YOU NEED TO DO, IT WILL BE SOON MODIFIED
-
-
-`STEPS :`
-
-- `1- Make the header accessible:`
-  - `Solution 1:` you just need to download `cpparser.cpp` into your current directory
-  - `Solution 2:` open your terminal in which directory you have your `main.cpp` and do <br>`curl https://raw.githubusercontent.com/AinTEAsports/cpParser/main/cpparser.cpp > ./cpparser.cpp`
-<br/><br>
-
-- `2- Start coding:` it is as simple as that, there is documentation in every function/method in `cpparser.cpp`
-<br/><br>
-
-- `3- Example:` here is a short example
-
+# Example
+---
+Here is a simple example of how works the `cpParser` library :
 ```cpp
 #include <iostream>
 #include <string>
@@ -27,8 +19,10 @@ A Python argparse like C++ argument parser
 
 
 int main(int argc, char** argv) {
+    // Initializing the parser
     Parser parser("A test CLI tool");
 
+    // Adding an argument, that stores true if given, but false if not given
     parser.addArgument(
         "-i",
         "--ignore-case",
@@ -37,17 +31,27 @@ int main(int argc, char** argv) {
         "Ignores case"
     );
 
+    // We get the args, it is a std::map<std::string, Argument>
     auto args = parser.parseArgs(argc, argv);
 
     if (args["ignorecase"].Bool == true) {
-        std::cout << "Ignore case flag was given" << std::endl;
+        std::cout << "'Ignore case' flag was given" << std::endl;
+    } else {
+        std::cout << "'Ignore case' flag was not given" << std::endl;
     }
 
     return 0;
 }
 ```
-Also, if you want an even more complex example, check `main.cpp` (and if you want to test it, don't forget to compile it with flag `-lcpr`)
-<br/><br>
 
-- `4- Problems`
-If you encounter any problems, please contact me on Discord: `AinTea#0519`
+<br>
+
+# Documentation
+---
+
+
+<br>
+
+# Problems
+---
+If you had any problem with compiling/using the library, or if you have any suggestions, please contact `AinTea#0519` on <a href="https://discord.com">Discord</a>
