@@ -4,7 +4,62 @@ To `compile` the library, use `setup.sh` by doing in your terminal :
 chmod +x setup.sh && ./setup.sh
 ```
 # Example
-Here is a simple example of how works the `cpParser` library :
+Here are 4 simple example of how works the `cpParser` library, with each argument type :
+```cpp
+#include <iostream>
+#include <string>
+
+#include "cpparser.cpp"
+
+
+int main(int argc, char** argv) {
+    Parser parser("Example for 'Parser::STORE_ONE_VALUE' argument type");
+
+    parser.addArgument(
+        "-n",
+        "--name",
+        "name",
+        Parser::STORE_ONE_VALUE,
+        "User name"
+    );
+
+    auto args = parser.parseArgs(argc, argv);
+
+    std::cout << "Your name is " << args["name"] << std::endl;
+
+    return 0;
+}
+```
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "cpparser.cpp"
+
+
+int main(int argc, char** argv) {
+    Parser parser("Example for 'Parser::STORE_MULTIPLE_VALUES' argument type");
+
+    parser.addArgument(
+        "-u",
+        "--urls",
+        "urlList",
+        Parser::STORE_MULTIPLE_VALUES,
+        "The list of URL"
+    );
+
+    auto args = parser.parseArgs(argc, argv);
+
+    for (std::string url: args["urlList"]) {
+        std::cout << url << std::endl;
+    }
+
+    return 0;
+}
+```
+
 ```cpp
 #include <iostream>
 #include <string>
@@ -14,10 +69,8 @@ Here is a simple example of how works the `cpParser` library :
 
 
 int main(int argc, char** argv) {
-    // Initializing the parser
-    Parser parser("A test CLI tool");
+    Parser parser("Example for 'Parser::STORE_TRUE' argument type (same goes for 'Parser::STORE_FALSE')");
 
-    // Adding an argument, that stores true if given, but false if not given
     parser.addArgument(
         "-i",
         "--ignore-case",
@@ -26,7 +79,6 @@ int main(int argc, char** argv) {
         "Ignores case"
     );
 
-    // We get the args, it is a std::map<std::string, Argument>
     auto args = parser.parseArgs(argc, argv);
 
     if (args["ignorecase"].Bool == true) {
@@ -39,10 +91,12 @@ int main(int argc, char** argv) {
 }
 ```
 # Documentation
+**Each argument type has an example in 'Example' part**
+
 There are 4 argument types (`Default`  means the value when the argument is not called) :
-* `Parser::STORE_ONE_VALUE`, accessible with `args["argname"].String`, has type `std::string`. Default to `""`
-* `Parser::STORE_MULTIPLE_VALUES`, accessible with `args["argname"].Vector`, has type `std::vector<std::string>`. Default to `{}`
-* `Parser::STORE_TRUE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `false`
-* `Parser::STORE_FALSE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `true`
+* `Parser::STORE_ONE_VALUE`, accessible with `args["argname"].String`, has type `std::string`. Default to `""`.
+* `Parser::STORE_MULTIPLE_VALUES`, accessible with `args["argname"].Vector`, has type `std::vector<std::string>`. Default to `{}`.
+* `Parser::STORE_TRUE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `false`.
+* `Parser::STORE_FALSE`, accessible with `args["argname"].Bool`, has type `bool`. Default to `true`.
 # Problems
 If you had any problem with compiling/using the library, or if you have any suggestions, please contact `AinTea#0519` on <a href="https://discord.com">Discord</a>
