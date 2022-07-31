@@ -106,7 +106,7 @@ int main(int argc, char** argv) {
 
 There are 4 argument types (`Default`  means the value when the argument is not called) :
 * `Parser::STORE_ONE_VALUE` :
-  - Accessible by: `args["argname"].String`
+  - **Accessible by:** `args["argname"].String`
   - Type: `std::string`
   - Default to: `""`.
 <br>
