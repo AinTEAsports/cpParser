@@ -4,9 +4,7 @@ To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
 chmod +x setup.sh && ./setup.sh
 ```
-
 <br>
-
 # Example
 ---
 Here is a simple example of how works the `cpParser` library :
