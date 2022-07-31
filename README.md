@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
 }
 ```
 <br>
+
 ```cpp
 #include <iostream>
 #include <string>
@@ -60,6 +61,7 @@ int main(int argc, char** argv) {
 }
 ```
 <br>
+
 ```cpp
 #include <iostream>
 #include <string>
