@@ -1,3 +1,8 @@
+# <a name="index-section"></a> Index
+Here is a list of what you'll find in this `README.md` :
+* 
+
+
 # <a name="installation-section"></a> Installation
 To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
