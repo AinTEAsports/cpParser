@@ -1,11 +1,9 @@
 # Installation
----
 To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
 chmod +x setup.sh && ./setup.sh
 ```
 # Example
----
 Here is a simple example of how works the `cpParser` library :
 ```cpp
 #include <iostream>
@@ -41,11 +39,6 @@ int main(int argc, char** argv) {
 }
 ```
 # Documentation
----
-
-
-<br>
-
 # Problems
 ---
 If you had any problem with compiling/using the library, or if you have any suggestions, please contact `AinTea#0519` on <a href="https://discord.com">Discord</a>
