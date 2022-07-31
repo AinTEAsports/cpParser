@@ -38,6 +38,7 @@ int main(int argc, char** argv) {
 }
 ```
 <br>
+---
 
 ```cpp
 #include <iostream>
@@ -68,6 +69,7 @@ int main(int argc, char** argv) {
 }
 ```
 <br>
+---
 
 ```cpp
 #include <iostream>
