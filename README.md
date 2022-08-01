@@ -14,6 +14,7 @@ chmod +x setup.sh && ./setup.sh
 ```
 <br>
 Or you can do it by yourself by typing in your terminal :
+
 ```sh
 [[ ! -d lib ]] && mkdir lib
 g++ -c ./cpparser.cpp
