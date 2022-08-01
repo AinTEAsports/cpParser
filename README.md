@@ -1,6 +1,7 @@
 # <a name="index-section"></a> Index
 Here is a list of what you'll find in this `README.md` :
 * [Installation guide](#installation-section)
+* [Compilation guide](#compilation-section)
 * [Documentation](#documentation-section)
 * [Code examples](#example-section)
 * [Report problems](#problems-section)
@@ -10,6 +11,13 @@ Here is a list of what you'll find in this `README.md` :
 To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
 chmod +x setup.sh && ./setup.sh
+```
+
+
+# <a name="compilation-section"></a> Compilation
+To compile your program you will need to add some flags, just like this :
+```sh
+g++ <your_program> -lcpparser I include -L lib
 ```
 
 
