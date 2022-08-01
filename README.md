@@ -1,8 +1,8 @@
 # <a name="index-section"></a> Index
 Here is a list of what you'll find in this `README.md` :
 * [Installation guide](#installation-section)
-* [Code examples](#example-section)
 * [Documentation](#documentation-section)
+* [Code examples](#example-section)
 * [Report problems](#problems-section)
 <br></br>
 
