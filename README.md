@@ -12,6 +12,14 @@ To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
 chmod +x setup.sh && ./setup.sh
 ```
+<br>
+Or you can do it by yourself by typing in your terminal :
+```sh
+[[ ! -d lib ]] && mkdir lib
+g++ -c ./cpparser.cpp
+ar cr libcpparser.a *.o
+mv libcpparser.a lib/
+```
 
 
 # <a name="compilation-section"></a> Compilation
