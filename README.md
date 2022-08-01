@@ -1,9 +1,10 @@
 # <a name="index-section"></a> Index
 Here is a list of what you'll find in this `README.md` :
-* [Installation guide](#installation-section)
-* [Code examples](#example-section)
-* [Documentation](#documentation-section)
-* [Report problems](#problems-section)
+- [<a name="index-section"></a> Index](#-index)
+- [<a name="installation-section"></a> Installation](#-installation)
+- [<a name="documentation-section"></a> Documentation](#-documentation)
+- [<a name="example-section"></a> Example](#-example)
+- [<a name="problems-section"></a> Problems](#-problems)
 <br></br>
 
 # <a name="installation-section"></a> Installation
@@ -11,6 +12,34 @@ To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
 chmod +x setup.sh && ./setup.sh
 ```
+
+
+# <a name="documentation-section"></a> Documentation
+**Each argument type has an example in [example](#example-section) section** <br></br>
+
+There are 4 argument types (`Default`  means the value when the argument is not called) :
+* `Parser::STORE_ONE_VALUE` :
+  - **Accessible by:** `args["argname"].String`
+  - **Type:** `std::string`
+  - **Default to:** `""`.
+<br>
+
+* `Parser::STORE_MULTIPLE_VALUES`
+  - **Accessible by:** `args["argname"].Vector`
+  - **Type:** `std::vector<std::string>`
+  - **Default to:** `{}`.
+<br>
+
+* `Parser::STORE_TRUE`
+  - **Accessible by:** `args["argname"].Bool`
+  - **Has type:** `bool`
+  - **Default to:** `false`.
+<br>
+
+* `Parser::STORE_FALSE`
+  - **Accessible by:** `args["argname"].Bool`
+  - **Type:** `bool`
+  - **Default to:** `true`
 
 
 # <a name="example-section"></a> Example
@@ -104,34 +133,6 @@ int main(int argc, char** argv) {
     return 0;
 }
 ```
-
-
-# <a name="documentation-section"></a> Documentation
-**Each argument type has an example in [example](#example-section) section** <br></br>
-
-There are 4 argument types (`Default`  means the value when the argument is not called) :
-* `Parser::STORE_ONE_VALUE` :
-  - **Accessible by:** `args["argname"].String`
-  - **Type:** `std::string`
-  - **Default to:** `""`.
-<br>
-
-* `Parser::STORE_MULTIPLE_VALUES`
-  - **Accessible by:** `args["argname"].Vector`
-  - **Type:** `std::vector<std::string>`
-  - **Default to:** `{}`.
-<br>
-
-* `Parser::STORE_TRUE`
-  - **Accessible by:** `args["argname"].Bool`
-  - **Has type:** `bool`
-  - **Default to:** `false`.
-<br>
-
-* `Parser::STORE_FALSE`
-  - **Accessible by:** `args["argname"].Bool`
-  - **Type:** `bool`
-  - **Default to:** `true`
 
 
 # <a name="problems-section"></a> Problems
