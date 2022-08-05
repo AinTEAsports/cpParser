@@ -29,7 +29,7 @@ function main() {
     mv "${LIBRARY_NAME}" lib/
 
 
-	echo -e "[+] Done !\n"
+	echo -e "\n[+] Done !\n"
 }
 
 
