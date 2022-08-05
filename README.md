@@ -26,7 +26,7 @@ mv libcpparser.a lib/
 # <a name="compilation-section"></a> Compilation
 To compile your program you will need to add some flags, just like this :
 ```sh
-g++ <your_program> -lcpparser I include -L lib
+g++ <your_program> -lcpparser -I include -L lib
 ```
 
 
