@@ -15,13 +15,21 @@ function link_object_files {
 
 function main() {
     if [[ ! -d lib ]]; then
+		echo "[/!\\] 'lib/' folder not found, creating it..."
         mkdir ./lib
     fi
 
+	echo "[*] Compiling to object files..."
     compile_to_object_file
-    link_object_files
     
+	echo "[*] Linking object files..."
+	link_object_files
+    
+	echo "[*] Last step, moving lib files into right folder..."
     mv "${LIBRARY_NAME}" lib/
+
+
+	echo "[+] Done !\n"
 }
 
 
