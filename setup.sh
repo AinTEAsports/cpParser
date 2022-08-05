@@ -15,7 +15,7 @@ function link_object_files {
 
 function main() {
     if [[ ! -d lib ]]; then
-		echo "[/!\\] 'lib/' folder not found, creating it..."
+		echo -e "\n[ /!\\ ] 'lib/' folder not found, creating it..."
         mkdir ./lib
     fi
 
@@ -29,7 +29,7 @@ function main() {
     mv "${LIBRARY_NAME}" lib/
 
 
-	echo "[+] Done !\n"
+	echo -e "[+] Done !\n"
 }
 
 
