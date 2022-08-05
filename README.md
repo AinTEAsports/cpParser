@@ -10,7 +10,7 @@ Here is a list of what you'll find in this `README.md` :
 # <a name="installation-section"></a> Installation
 To `compile` the library, use `setup.sh` by doing in your terminal :
 ```sh
-chmod +x setup.sh && ./setup.sh
+[[ -x ./setup.sh ]] && ./setup.sh || $(chmod +x ./setup.sh && ./setup.sh)
 ```
 <br>
 Or you can do it by yourself by typing in your terminal :
