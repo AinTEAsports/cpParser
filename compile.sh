@@ -70,6 +70,11 @@ fi
 
 while [[ -n ${1} ]]; do
 	case ${1} in
+		-h|--help)
+			show_usage
+
+			exit 0
+			;;
 		--run)
 			run_script=1
 			shift
@@ -92,5 +97,5 @@ compile_file "${script_name}" "${output_script_name}"
 
 
 if [[ ${run_script} == 1 ]]; then
-	./${output_script_name} "${arguments}"
+	./"${output_script_name}" ${arguments}
 fi
