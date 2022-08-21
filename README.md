@@ -129,7 +129,7 @@ int main(int argc, char** argv) {
 
 int main(int argc, char** argv) {
 	// It's the same for 'Parser::STORE_FALSE'
-    Parser parser("Example for 'Parser::STORE_TRUE' argument type);
+    Parser parser("Example for 'Parser::STORE_TRUE' argument type");
 
     parser.addArgument(
         "-i",
