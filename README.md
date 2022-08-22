@@ -71,11 +71,12 @@ int main(int argc, char** argv) {
     Parser parser("Example for 'Parser::STORE_ONE_VALUE' argument type");
 
     parser.addArgument(
-        "-n",
-        "--name",
-        "name",
-        Parser::STORE_ONE_VALUE,
-        "User name"
+        "-n",							// Short flag
+        "--name",						// Long flag
+        "name",							// Key with which you will access value
+		true,							// true if the argument is required, false otherwise
+        Parser::STORE_ONE_VALUE,		// Type of stored argument
+        "User name"						// Description of argument
     );
 
     auto args = parser.parseArgs(argc, argv);
@@ -103,6 +104,7 @@ int main(int argc, char** argv) {
         "-u",
         "--urls",
         "urlList",
+		true,
         Parser::STORE_MULTIPLE_VALUES,
         "The list of URL"
     );
@@ -135,6 +137,7 @@ int main(int argc, char** argv) {
         "-i",
         "--ignore-case",
         "ignorecase",
+		false,
         Parser::STORE_TRUE,
         "Ignores case"
     );
