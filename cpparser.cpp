@@ -6,6 +6,8 @@
 
 #include "include/cpparser.hpp"
 
+// Yes, I did that, don't judge me please
+#define yeet throw
 
 /*               CPUTILS               */
 
@@ -226,13 +228,13 @@ std::vector<Argument> Parser::getArgs() {
 void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::string description = "") {
     if (!shortFlag.rfind("-", 0) == 0 || !longFlag.rfind("-", 0) == 0) {
         char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
-        throw std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
+        yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
         exit(0);
     }
 
     if (std::count(this->POSSIBLE_ACTIONS.begin(), this->POSSIBLE_ACTIONS.end(), action) == 0) {
-        throw std::invalid_argument("The action you gave for argument named '" + argumentName + "' does not exists");
+        yeet std::invalid_argument("The action you gave for argument named '" + argumentName + "' does not exists");
 
         exit(0);
     }
@@ -296,7 +298,7 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
 
         if (!this->isArgumentRegistered(argument)) {
             if (this->throwError) {
-                throw std::runtime_error("Flag '" + argument + "' is not valid");
+                yeet std::runtime_error("Flag '" + argument + "' is not valid");
             } else {
                 std::cout << argv[0] << ": unknown flag ('" << argument << "') was found\n\n";
 
