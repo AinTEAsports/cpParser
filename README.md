@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
         "-u",
         "--urls",
         "urlList",
-		true,
+        true,
         Parser::STORE_MULTIPLE_VALUES,
         "The list of URL"
     );
@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
         "-i",
         "--ignore-case",
         "ignorecase",
-		false,
+        false,
         Parser::STORE_TRUE,
         "Ignores case"
     );
