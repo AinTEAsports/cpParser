@@ -140,10 +140,11 @@ char* cputils::InvalidFlagException::what() {
 
 /*               ARGUMENT CLASS               */
 
-Argument::Argument(std::string shortFlag, std::string longFlag, std::string  argumentName, int action = 0,  std::string description = "") {
+Argument::Argument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0,  std::string description = "") {
     this->shortFlag = shortFlag;
     this->longFlag = longFlag;
     this->argumentName = argumentName;
+    this->required = required;
     this->action = action;
     this->description = description;
 }
@@ -163,6 +164,10 @@ std::string Argument::getArgumentName() {
     return this->argumentName;
 }
 
+
+bool Argument::isRequired() {
+    return this->required;
+}
 
 int Argument::getAction() {
     return this->action;
@@ -191,7 +196,7 @@ bool Parser::isArgumentRegistered(std::string flagName) {
 
 Parser::Parser(std::string help, bool throwError = false) {
     this->description = help;
-    this->addArgument("-h", "--help", "help", 0, "Shows this message");
+    this->addArgument("-h", "--help", "help", 0, false, "Shows this message");
 
     this->throwError = throwError;
 }
@@ -203,7 +208,12 @@ void Parser::showHelp() {
     std::cout << '\n';
 
     for (Argument argument: *argumentList) {
-        std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]" << "\t\t" << argument.getDescription() << '\n';
+        // TODO : do appropriate help show, it should be really easy
+        if (argument.isRequired()) {
+            std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "] (required)\t\t" << argument.getDescription() << '\n';
+        } else {
+            std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]\t\t" << argument.getDescription() << '\n';
+        }
     }
 }
 
@@ -213,7 +223,7 @@ std::vector<Argument> Parser::getArgs() {
 }
 
 
-void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string  argumentName, int action = 0, std::string description = "") {
+void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::string description = "") {
     if (!shortFlag.rfind("-", 0) == 0 || !longFlag.rfind("-", 0) == 0) {
         char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
         throw std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
@@ -227,7 +237,7 @@ void Parser::addArgument(std::string shortFlag, std::string longFlag, std::strin
         exit(0);
     }
 
-    Argument newArgument(shortFlag, longFlag, argumentName, action, description);
+    Argument newArgument(shortFlag, longFlag, argumentName, required, action, description);
     argumentList->push_back(newArgument);
 }
 
@@ -245,8 +255,21 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
     std::vector<std::string> argvalues = cputils::toVector(argv, argc);
     std::map<std::string, ArgumentValue> argsMap;
 
-    // Filling the map so not given arguments have default value of ""
+    std::vector<Argument> ungivenRequiredArguments = {};
+
+
+    /* Filling the map so not given arguments have default value of:
+        - "" for Parser::STORE_ONE_VALUE
+        - {} for Parser::STORE_MULTIPLE_VALUES
+        - false for Parser::STORE_TRUE
+        - true for Parser::STORE_FALSE
+    */
+
     for (Argument a: *argumentList) {
+        if (a.isRequired()) {
+            ungivenRequiredArguments.push_back(a);
+        }
+
         switch (a.getAction()) {
             case Parser::STORE_ONE_VALUE:
                 argsMap.insert(std::pair<std::string, ArgumentValue>(a.getArgumentName(), ArgumentValue{"", {}, false}));
@@ -261,7 +284,6 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
                 argsMap.insert(std::pair<std::string, ArgumentValue>(a.getArgumentName(), ArgumentValue{"", {}, true}));
                 break;
         }
-
     }
 
 
@@ -329,10 +351,27 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
                     default:
                         printf("WTF ???\n");
                 }
+
+                for (int i = 0; i < ungivenRequiredArguments.size(); i++) {
+                    if (ungivenRequiredArguments[i].getArgumentName() == registeredArgument.getArgumentName()) {
+                        // Removes the element to index 'i'
+                        ungivenRequiredArguments.erase(ungivenRequiredArguments.begin() + i);
+                    }
+                }
             }
         }
     }
 
+
+    // Check if ungivenRequiredArguments size is different of 0 (if this is the case, some required arguments were not given)
+    if (ungivenRequiredArguments.size() != 0) {
+        std::string forgottenFlags = "";
+        for (Argument a: ungivenRequiredArguments) forgottenFlags += "[" + a.getShortFlag() + "|" + a.getLongFlag() + "], ";
+
+        std::cout << "Some required arguments are missing, these are: " << forgottenFlags << "\n\n";
+        this->showHelp();
+        exit(1);
+    }
 
     return argsMap;
 }

@@ -55,15 +55,17 @@ class Argument {
         std::string shortFlag;
         std::string longFlag;
         std::string argumentName;
+        bool required;
         int action;
         std::string description;
 
     public:
-        Argument(std::string shortFlag, std::string longFlag, std::string  argumentName, int action,  std::string description);
+        Argument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action,  std::string description);
 
         std::string getShortFlag();
         std::string getLongFlag();
         std::string getArgumentName();
+        bool isRequired();
         int getAction();
         std::string getDescription();
 };
@@ -107,6 +109,6 @@ class Parser {
 
         void showHelp();
         std::vector<Argument> getArgs();
-        void addArgument(std::string shortFlag, std::string longFlag, std::string  argumentName, int action, std::string description);
+        void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::string description);
         std::map<std::string, ArgumentValue> parseArgs(int argc, char** argv);
 };
