@@ -212,7 +212,7 @@ void Parser::showHelp() {
     for (Argument argument: *argumentList) {
         // TODO : do appropriate help show, it should be really easy
         if (argument.isRequired()) {
-            std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "] (required)\t\t" << argument.getDescription() << '\n';
+            std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]\t\t" << argument.getDescription() << "\t(required)\n";
         } else {
             std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]\t\t" << argument.getDescription() << '\n';
         }
