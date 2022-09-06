@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <iomanip>
 
 #include "include/cpparser.hpp"
 
@@ -209,12 +210,29 @@ void Parser::showHelp() {
     std::cout << cputils::multiplyChar("-", description.size()) << '\n';
     std::cout << '\n';
 
+
+	int max_length = 0;
+	std::string description;
+
+	for (Argument argument: *argumentList) {
+		description = std::string("[") + argument.getShortFlag() + std::string("|") + argument.getLongFlag() + std::string("]");
+
+		if (description.size() > max_length) max_length = description.size();
+	}
+
+
+	std::string help_line;
+
     for (Argument argument: *argumentList) {
         // TODO : do appropriate help show, it should be really easy
+		help_line = std::string("[") + argument.getShortFlag() + std::string("|") + argument.getLongFlag() + std::string("]");
+
         if (argument.isRequired()) {
-            std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]\t\t" << argument.getDescription() << "\t(required)\n";
+            /* std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]\t\t" << argument.getDescription() << "\t(required)\n"; */
+			std::cout << std::setw(max_length) << std::left << help_line << "          " << argument.getDescription() << "\t(required)\n";
         } else {
-            std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]\t\t" << argument.getDescription() << '\n';
+            /* std::cout << "[" << argument.getShortFlag() << "|" << argument.getLongFlag() << "]\t\t" << argument.getDescription() << '\n'; */
+			std::cout << std::setw(max_length) << std::left << help_line << "          " << argument.getDescription() << '\n';
         }
     }
 }
@@ -226,7 +244,7 @@ std::vector<Argument> Parser::getArgs() {
 
 
 void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::string description = "") {
-    if (!shortFlag.rfind("-", 0) == 0 || !longFlag.rfind("-", 0) == 0) {
+    if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
         char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
@@ -326,7 +344,7 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
     cputils::shift(&argvalues);
 
     while (argvalues.size() != 0) {
-        if (!argvalues[0].rfind("-", 0) == 0) {
+        if (! (argvalues[0].rfind("-", 0) == 0)) {
             cputils::shift(&argvalues);
         }
 
