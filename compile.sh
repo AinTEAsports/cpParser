@@ -11,7 +11,7 @@ function show_usage {
 Usage: ${0} <filename> [OPTIONS...]
 
 Required arguments:
-        <filename>                              The C++ scipt you want to compile
+        <filename>                              The C++ script you want to compile
 
 Optionnal arguments:
         --run [OPTIONS...]              If you want to run the script after compiling it.
