@@ -386,7 +386,11 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
     // Check if ungivenRequiredArguments size is different of 0 (if this is the case, some required arguments were not given)
     if (ungivenRequiredArguments.size() != 0) {
         std::string forgottenFlags = "";
-        for (Argument a: ungivenRequiredArguments) forgottenFlags += "[" + a.getShortFlag() + "|" + a.getLongFlag() + "], ";
+        for (Argument a: ungivenRequiredArguments) {
+			forgottenFlags += "[" + a.getShortFlag() + "|" + a.getLongFlag() + "]";
+
+			if (a.getArgumentName() != ungivenRequiredArguments[ungivenRequiredArguments.size()-1].getArgumentName()) forgottenFlags += ", ";
+		}
 
         std::cout << "Some required arguments are missing, these are: " << forgottenFlags << "\n\n";
         this->showHelp();
