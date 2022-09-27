@@ -64,7 +64,7 @@ Here are 4 simple example of how works the `cpParser` library, with each argumen
 #include <iostream>
 #include <string>
 
-#include "cpparser.cpp"
+#include "include/cpparser.hpp"
 
 
 int main(int argc, char** argv) {
@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
 #include <string>
 #include <vector>
 
-#include "cpparser.cpp"
+#include "include/cpparser.hpp"
 
 
 int main(int argc, char** argv) {
@@ -126,7 +126,7 @@ int main(int argc, char** argv) {
 #include <string>
 #include <map>
 
-#include "cpparser.cpp"
+#include "include/cpparser.hpp"
 
 
 int main(int argc, char** argv) {
