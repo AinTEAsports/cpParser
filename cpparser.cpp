@@ -197,12 +197,20 @@ bool Parser::isArgumentRegistered(std::string flagName) {
 }
 
 
-Parser::Parser(std::string help, bool throwError = false) {
+Parser::Parser(std::string help, bool throwError) {
     this->description = help;
     this->addArgument("-h", "--help", "help", 0, false, "Shows this message");
 
     this->throwError = throwError;
 }
+
+Parser::Parser(std::string help) {
+    this->description = help;
+    this->addArgument("-h", "--help", "help", 0, false, "Shows this message");
+
+    this->throwError = false;
+}
+
 
 
 void Parser::showHelp() {

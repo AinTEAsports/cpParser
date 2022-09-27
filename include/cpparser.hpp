@@ -105,6 +105,7 @@ class Parser {
 
 
         Parser(std::string help, bool throwError);
+        Parser(std::string help);
 
 
         void showHelp();
