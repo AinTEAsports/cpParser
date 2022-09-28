@@ -1,10 +1,11 @@
 # <a name="index-section"></a> Index
 Here is a list of what you'll find in this `README.md` :
-* [Installation guide](#installation-section)
-* [Compilation guide](#compilation-section)
-* [Documentation](#documentation-section)
-* [Code examples](#example-section)
-* [Report problems](#problems-section)
+- [<a name="index-section"></a> Index](#-index)
+- [<a name="installation-section"></a> Installation](#-installation)
+- [<a name="compilation-section"></a> Compilation](#-compilation)
+- [<a name="documentation-section"></a> Documentation](#-documentation)
+- [<a name="example-section"></a> Example](#-example)
+- [<a name="problems-section"></a> Problems](#-problems)
 <br></br>
 
 # <a name="installation-section"></a> Installation
@@ -32,8 +33,12 @@ To compile your program you will need to add some flags, just like this :
 
 <br>
 
-<h3>:warning: If you want to compile manually your program you must add some things ! Otherwise you won't be able to compile your program.</h3>
+<h3>
+    :warning: If you want to compile manually your program you must add some things ! Otherwise you won't be able to compile your program.
+</h3>
+
 Here's an example with `g++` compiler: <br>
+
 ```sh
 g++ <your_file> cpparser.cpp -Iinclude
 ```
