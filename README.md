@@ -30,7 +30,9 @@ To compile your program you will need to add some flags, just like this :
 ./compile.sh <your_file> [OTHER FLAGS]
 ```
 
-:warning: If you want to compile manually your program you must add some things ! Otherwise you won't be able to compile your program.
+<br>
+
+<h3>:warning:</h3> If you want to compile manually your program you must add some things ! Otherwise you won't be able to compile your program.
 Here's an example with `g++` compiler:
 ```sh
 g++ <your_file> cpparser.cpp -Iinclude
