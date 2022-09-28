@@ -1,4 +1,4 @@
-# <a name="index-section"></a> Index
+<!-- # <a name="index-section"></a> Index
 Here is a list of what you'll find in this `README.md` :
 - [<a name="index-section"></a> Index](#-index)
 - [<a name="installation-section"></a> Installation](#-installation)
@@ -6,6 +6,15 @@ Here is a list of what you'll find in this `README.md` :
 - [<a name="documentation-section"></a> Documentation](#-documentation)
 - [<a name="example-section"></a> Example](#-example)
 - [<a name="problems-section"></a> Problems](#-problems)
+<br></br> -->
+
+# <a name="index-section"></a> Index
+Here is a list of what you'll find in this `README.md` :
+* [Installation guide](#installation-section)
+* [Compilation guide](#compilation-section)
+* [Documentation](#documentation-section)
+* [Code examples](#example-section)
+* [Report problems](#problems-section)
 <br></br>
 
 # <a name="installation-section"></a> Installation
