@@ -90,7 +90,7 @@ Here are 4 simple example of how works the `cpParser` library, with each argumen
 #include "cpparser.hpp"
 
 
-int main(int argc, char** argv) {
+int main(int argc, char* argv[]) {
     Parser parser("Example for 'Parser::STORE_ONE_VALUE' argument type");
 
     parser.addArgument(
@@ -120,7 +120,7 @@ int main(int argc, char** argv) {
 #include "cpparser.hpp"
 
 
-int main(int argc, char** argv) {
+int main(int argc, char* argv[]) {
     Parser parser("Example for 'Parser::STORE_MULTIPLE_VALUES' argument type");
 
     parser.addArgument(
@@ -152,7 +152,7 @@ int main(int argc, char** argv) {
 #include "cpparser.hpp"
 
 
-int main(int argc, char** argv) {
+int main(int argc, char* argv[]) {
     // It's the same for 'Parser::STORE_FALSE'
     Parser parser("Example for 'Parser::STORE_TRUE' argument type");
 
