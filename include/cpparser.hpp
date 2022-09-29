@@ -107,9 +107,12 @@ class Parser {
         Parser(std::string help, bool throwError);
         Parser(std::string help);
 
-
         void showHelp();
+
         std::vector<Argument> getArgs();
+
         void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::string description);
+        void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action, std::string description);
+
         std::map<std::string, ArgumentValue> parseArgs(int argc, char** argv);
 };

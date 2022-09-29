@@ -269,6 +269,23 @@ void Parser::addArgument(std::string shortFlag, std::string longFlag, std::strin
     argumentList->push_back(newArgument);
 }
 
+void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action = 0, std::string description = "") {
+    if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
+        char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
+        yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
+
+        exit(0);
+    }
+
+    if (std::count(this->POSSIBLE_ACTIONS.begin(), this->POSSIBLE_ACTIONS.end(), action) == 0) {
+        yeet std::invalid_argument("The action you gave for argument named '" + argumentName + "' does not exists");
+
+        exit(0);
+    }
+
+    Argument newArgument(shortFlag, longFlag, argumentName, false, action, description);
+    argumentList->push_back(newArgument);
+}
 
 
 std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
