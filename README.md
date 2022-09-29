@@ -97,8 +97,8 @@ int main(int argc, char* argv[]) {
         "-n",					// Short flag
         "--name",				// Long flag
         "name",					// Key with which you will access value
-        true,					// true if the argument is required, false otherwise
-						// default to false if nothing given
+        true,					// true if the argument is required, false 
+						// otherwise. Default to false if nothing given
         Parser::STORE_ONE_VALUE,		// Type of stored argument
         "User name"				// Description of argument
     );
