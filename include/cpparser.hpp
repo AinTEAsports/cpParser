@@ -14,6 +14,7 @@
 
 // In every function/class I will write why I put his here, and an example of how and why to use it
 // TODO : do what the comment above this one says
+
 namespace cputils {
 	std::string strip(std::string string);
     std::vector<std::string> split(std::string string, char separator);
@@ -85,6 +86,8 @@ struct ArgumentValue {
     std::vector<std::string> Vector = {};
     bool Bool;
 };
+
+std::ostream& operator<<(std::ostream &stream, const ArgumentValue &argval);
 
 
 class Parser {
