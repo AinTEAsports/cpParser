@@ -11,9 +11,8 @@
 #define yeet throw
 
 
-std::ostream& operator<<(std::ostream& stream, ArgumentValue argval) {
+std::ostream& operator<<(std::ostream &stream, ArgumentValue argval) {
 	stream << argval.String;
-	
 	return stream;
 }
 
