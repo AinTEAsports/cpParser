@@ -163,7 +163,6 @@ int main(int argc, char* argv[]) {
         "-i",
         "--ignore-case",
         "ignorecase",
-        false,
         Parser::STORE_TRUE,
         "Ignores case"
     );
