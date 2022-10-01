@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
 						// otherwise. Default to false if nothing given
         Parser::STORE_ONE_VALUE,		// Type of stored argument
         {"ain", "tea"}				// Values accepted for the flag.
-						// If not given, ever value are considered correct
+						// If not given, all values are considered correct
         "User name"				// Description of argument
     );
 
