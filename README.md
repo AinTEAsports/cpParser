@@ -107,7 +107,9 @@ int main(int argc, char* argv[]) {
 
     auto args = parser.parseArgs(argc, argv);
 
-    std::cout << "Your name is " << args["name"].String << std::endl;
+	// args["name"] is printable directly, but to get the value you
+	// will need to write 'args["name"].String'
+    std::cout << "Your name is " << args["name"] << std::endl;
 
     return 0;
 }
