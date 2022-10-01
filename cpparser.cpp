@@ -10,6 +10,14 @@
 // Yes, I did that, don't judge me please
 #define yeet throw
 
+
+std::ostream& operator<<(std::ostream& stream, ArgumentValue argval) {
+	stream << argval.String;
+	
+	return stream;
+}
+
+
 /*               CPUTILS               */
 
 std::string cputils::strip(std::string string) {
