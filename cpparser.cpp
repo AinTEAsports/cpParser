@@ -74,6 +74,16 @@ std::string cputils::removeLastChar(std::string string) {
 
 
 template <typename T>
+bool cputils::contains(std::vector<T> v, T to_find) {
+	for (T element: v) {
+		if (element == to_find) return true;
+	}
+
+	return false;
+}
+
+
+template <typename T>
 void cputils::shift(std::vector<T>* vector) {
     vector->erase(vector->begin());
 }
@@ -143,12 +153,13 @@ char* cputils::InvalidFlagException::what() {
 
 /*               ARGUMENT CLASS               */
 
-Argument::Argument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0,  std::string description = "") {
+Argument::Argument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
     this->shortFlag = shortFlag;
     this->longFlag = longFlag;
     this->argumentName = argumentName;
     this->required = required;
     this->action = action;
+	this->choices = choices;
     this->description = description;
 }
 
@@ -177,8 +188,22 @@ int Argument::getAction() {
 }
 
 
+std::vector<std::string> Argument::getChoices() {
+	return this->choices;
+}
+
+
 std::string Argument::getDescription() {
     return this->description;
+}
+
+
+bool Argument::hasChoice(std::string to_check) {
+	for (std::string choice: this->choices) {
+		if (choice == to_check) return true;
+	}
+
+	return false;
 }
 
 
@@ -265,7 +290,7 @@ void Parser::addArgument(std::string shortFlag, std::string longFlag, std::strin
         exit(0);
     }
 
-    Argument newArgument(shortFlag, longFlag, argumentName, required, action, description);
+    Argument newArgument(shortFlag, longFlag, argumentName, required, action, {}, description);
     argumentList->push_back(newArgument);
 }
 
@@ -283,10 +308,45 @@ void Parser::addArgument(std::string shortFlag, std::string longFlag, std::strin
         exit(0);
     }
 
-    Argument newArgument(shortFlag, longFlag, argumentName, false, action, description);
+    Argument newArgument(shortFlag, longFlag, argumentName, false, action, {}, description);
     argumentList->push_back(newArgument);
 }
 
+void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
+    if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
+        char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
+        yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
+
+        exit(0);
+    }
+
+    if (std::count(this->POSSIBLE_ACTIONS.begin(), this->POSSIBLE_ACTIONS.end(), action) == 0) {
+        yeet std::invalid_argument("The action you gave for argument named '" + argumentName + "' does not exists");
+
+        exit(0);
+    }
+
+    Argument newArgument(shortFlag, longFlag, argumentName, false, action, choices, description);
+    argumentList->push_back(newArgument);
+}
+
+void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
+    if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
+        char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
+        yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
+
+        exit(0);
+    }
+
+    if (std::count(this->POSSIBLE_ACTIONS.begin(), this->POSSIBLE_ACTIONS.end(), action) == 0) {
+        yeet std::invalid_argument("The action you gave for argument named '" + argumentName + "' does not exists");
+
+        exit(0);
+    }
+
+    Argument newArgument(shortFlag, longFlag, argumentName, required, action, choices, description);
+    argumentList->push_back(newArgument);
+}
 
 std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
     // If arg count = 1 then there is only script name, so we just show help and exit
@@ -397,12 +457,24 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
                         printf("WTF ???\n");
                 }
 
+
+
+
                 for (int i = 0; i < ungivenRequiredArguments.size(); i++) {
                     if (ungivenRequiredArguments[i].getArgumentName() == registeredArgument.getArgumentName()) {
                         // Removes the element to index 'i'
                         ungivenRequiredArguments.erase(ungivenRequiredArguments.begin() + i);
                     }
                 }
+
+				if ((int) registeredArgument.getChoices().size() == 0) {
+					continue;
+				} else if (! cputils::contains(registeredArgument.getChoices(), argsMap[registeredArgument.getArgumentName()].String)) {
+					std::cout << "Value of argument '" << registeredArgument.getArgumentName() << "' is not valid" << std::endl;
+
+					this->showHelp();
+					exit(1);
+				}
             }
         }
     }
@@ -421,6 +493,7 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
         this->showHelp();
         exit(1);
     }
+
 
     return argsMap;
 }

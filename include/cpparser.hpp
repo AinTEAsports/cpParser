@@ -19,6 +19,9 @@ namespace cputils {
     std::vector<std::string> split(std::string string, char separator);
     std::string removeLastChar(std::string string);
 
+	template <typename T>
+	bool contains(std::vector<T> v, T value);
+
     template <typename T>
     void shift(std::vector<T>* vector);
 
@@ -57,17 +60,21 @@ class Argument {
         std::string argumentName;
         bool required;
         int action;
+		std::vector<std::string> choices;
         std::string description;
 
     public:
-        Argument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action,  std::string description);
+        Argument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::vector<std::string> choices, std::string description);
 
         std::string getShortFlag();
         std::string getLongFlag();
         std::string getArgumentName();
         bool isRequired();
         int getAction();
+		std::vector<std::string> getChoices();
         std::string getDescription();
+
+		bool hasChoice(std::string to_check);
 };
 
 
@@ -113,6 +120,8 @@ class Parser {
 
         void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::string description);
         void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action, std::string description);
+        void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::vector<std::string> choices, std::string description);
+        void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action, std::vector<std::string> choices, std::string description);
 
         std::map<std::string, ArgumentValue> parseArgs(int argc, char** argv);
 };
