@@ -86,7 +86,6 @@ struct ArgumentValue {
     std::vector<std::string> Vector = {};
     bool Bool;
 
-
     operator std::string() {return String;}
     operator std::vector<std::string>() {return Vector;}
     operator bool() {return Bool;}
