@@ -477,7 +477,7 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
 				if ((int) registeredArgument.getChoices().size() == 0) {
 					continue;
 				} else if (! cputils::contains(registeredArgument.getChoices(), argsMap[registeredArgument.getArgumentName()].String)) {
-					std::cout << "Value of argument '" << registeredArgument.getArgumentName() << "' is not valid" << std::endl;
+					std::cout << "Value of argument is '" << registeredArgument.getArgumentName() << "' is not valid" << std::endl;
 
 					this->showHelp();
 					exit(1);
