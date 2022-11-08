@@ -283,9 +283,9 @@ std::vector<Argument> Parser::getArgs() {
 }
 
 
-void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::string description = "") {
+Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::string description = "") {
     if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
-        char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
+        /* char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag"; */
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
         exit(0);
@@ -299,11 +299,13 @@ void Parser::addArgument(std::string shortFlag, std::string longFlag, std::strin
 
     Argument newArgument(shortFlag, longFlag, argumentName, required, action, {}, description);
     argumentList->push_back(newArgument);
+
+	return *this;
 }
 
-void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action = 0, std::string description = "") {
+Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action = 0, std::string description = "") {
     if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
-        char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
+        /* char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag"; */
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
         exit(0);
@@ -317,11 +319,13 @@ void Parser::addArgument(std::string shortFlag, std::string longFlag, std::strin
 
     Argument newArgument(shortFlag, longFlag, argumentName, false, action, {}, description);
     argumentList->push_back(newArgument);
+
+	return *this;
 }
 
-void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
+Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
     if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
-        char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
+        /* char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag"; */
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
         exit(0);
@@ -335,11 +339,13 @@ void Parser::addArgument(std::string shortFlag, std::string longFlag, std::strin
 
     Argument newArgument(shortFlag, longFlag, argumentName, false, action, choices, description);
     argumentList->push_back(newArgument);
+
+	return *this;
 }
 
-void Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
+Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
     if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
-        char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag";
+        /* char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag"; */
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
         exit(0);
@@ -353,6 +359,8 @@ void Parser::addArgument(std::string shortFlag, std::string longFlag, std::strin
 
     Argument newArgument(shortFlag, longFlag, argumentName, required, action, choices, description);
     argumentList->push_back(newArgument);
+
+	return *this;
 }
 
 std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {

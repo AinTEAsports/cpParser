@@ -125,10 +125,10 @@ class Parser {
 
         std::vector<Argument> getArgs();
 
-        void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::string description);
-        void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action, std::string description);
-        void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::vector<std::string> choices, std::string description);
-        void addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action, std::vector<std::string> choices, std::string description);
+        Parser& addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::string description);
+        Parser& addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action, std::string description);
+        Parser& addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required, int action, std::vector<std::string> choices, std::string description);
+        Parser& addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action, std::vector<std::string> choices, std::string description);
 
         std::map<std::string, ArgumentValue> parseArgs(int argc, char** argv);
 };
