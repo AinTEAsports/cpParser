@@ -1,0 +1,6 @@
+# VSCode config dir and files
+.vscode
+.vscode/*
+
+# Personnal txt files
+to_do.txt
