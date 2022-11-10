@@ -41,7 +41,7 @@ To compile your program you will need to add some flags, just like this :
 ```
 <br>
 <b>OR</b>
-You can use `make` if you feel like editing the source filename in the `Makefile`<br>
+<br>You can use `make` if you feel like editing the source filename in the `Makefile`<br>
 
 <br>
 
