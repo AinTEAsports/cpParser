@@ -41,6 +41,10 @@ To compile your program you will need to add some flags, just like this :
 ```
 
 <br>
+Or you can use `make` if you feel like editing the source filename in the `Makefile`
+<br>
+
+<br>
 
 <h3>
     :warning: If you want to compile manually your program you must add some things ! Otherwise you won't be able to compile your program.
