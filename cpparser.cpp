@@ -103,7 +103,7 @@ std::string cputils::getArgValue(std::vector<std::string>* argsVector) {
     shift(argsVector);
 
     // While first value does not starts with '-'
-    while (!(*argsVector)[0].rfind("-", 0) == 0) {
+    while ( !((*argsVector)[0].rfind("-", 0) == 0) ) {
         args += (*argsVector)[0] + " ";
         shift(argsVector);
 
@@ -284,7 +284,7 @@ std::vector<Argument> Parser::getArgs() {
 
 
 Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::string description = "") {
-    if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
+    if ( !(shortFlag.rfind("-", 0) == 0) || !(longFlag.rfind("-", 0) == 0) ) {
         /* char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag"; */
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
@@ -304,7 +304,7 @@ Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::st
 }
 
 Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action = 0, std::string description = "") {
-    if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
+    if ( !(shortFlag.rfind("-", 0) == 0) || !(longFlag.rfind("-", 0) == 0) ) {
         /* char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag"; */
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
@@ -324,7 +324,7 @@ Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::st
 }
 
 Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
-    if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
+    if ( !(shortFlag.rfind("-", 0) == 0) || !(longFlag.rfind("-", 0) == 0) ) {
         /* char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag"; */
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
@@ -344,7 +344,7 @@ Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::st
 }
 
 Parser& Parser::addArgument(std::string shortFlag, std::string longFlag, std::string argumentName, bool required = false, int action = 0, std::vector<std::string> choices = {}, std::string description = "") {
-    if (! (shortFlag.rfind("-", 0) == 0) || ! (longFlag.rfind("-", 0) == 0)) {
+    if ( !(shortFlag.rfind("-", 0) == 0) || !(longFlag.rfind("-", 0) == 0) ) {
         /* char error[] = "The flag you gave might start by '-' for the short flag, and by '--' for the long flag"; */
         yeet std::runtime_error("The flag you gave ('" + shortFlag + " | " + longFlag + "') might start by '-' for the short flag, and by '--' for the long flag");
 
@@ -409,12 +409,12 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
 
     // Verifying if every flag in argv is valid
     for (std::string argument: argvalues) {
-        if (!argument.rfind("-", 0) == 0) {
+        if ( !(argument.rfind("-", 0) == 0) ) {
             continue;
         }
 
 
-        if (!this->isArgumentRegistered(argument)) {
+        if ( !this->isArgumentRegistered(argument) ) {
             if (this->throwError) {
                 yeet std::runtime_error("Flag '" + argument + "' is not valid");
             } else {
@@ -444,7 +444,7 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
     cputils::shift(&argvalues);
 
     while (argvalues.size() != 0) {
-        if (! (argvalues[0].rfind("-", 0) == 0)) {
+        if ( !(argvalues[0].rfind("-", 0) == 0) ) {
             cputils::shift(&argvalues);
         }
 
@@ -469,7 +469,7 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
                         argsMap[registeredArgument.getArgumentName()].Bool = false;
                         break;
                     default:
-                        printf("WTF ???\n");
+                        printf("[DEBUG] WTF ???\n");
                 }
 
 
@@ -484,7 +484,7 @@ std::map<std::string, ArgumentValue> Parser::parseArgs(int argc, char** argv) {
 
 				if ((int) registeredArgument.getChoices().size() == 0) {
 					continue;
-				} else if (! cputils::contains(registeredArgument.getChoices(), argsMap[registeredArgument.getArgumentName()].String)) {
+				} else if ( !cputils::contains(registeredArgument.getChoices(), argsMap[registeredArgument.getArgumentName()].String)) {
 					std::cout << "Value of argument is '" << registeredArgument.getArgumentName() << "' is not valid" << std::endl;
 
 					this->showHelp();
