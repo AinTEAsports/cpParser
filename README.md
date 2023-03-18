@@ -60,25 +60,25 @@ g++ <your_file> cpparser.cpp -Iinclude
 
 There are 4 argument types (`Default`  means the value when the argument is not called) :
 * `Parser::STORE_ONE_VALUE` :
-  - **Accessible by:** `args["argname"].String`
+  - **Accessible by:** `args["<argname>"].String`
   - **Type:** `std::string`
   - **Default to:** `""`
 <br>
 
 * `Parser::STORE_MULTIPLE_VALUES`
-  - **Accessible by:** `args["argname"].Vector`
+  - **Accessible by:** `args["<argname>"].Vector`
   - **Type:** `std::vector<std::string>`
   - **Default to:** `{}`
 <br>
 
 * `Parser::STORE_TRUE`
-  - **Accessible by:** `args["argname"].Bool`
+  - **Accessible by:** `args["<argname>"].Bool`
   - **Has type:** `bool`
   - **Default to:** `false`
 <br>
 
 * `Parser::STORE_FALSE`
-  - **Accessible by:** `args["argname"].Bool`
+  - **Accessible by:** `args["<argname>"].Bool`
   - **Type:** `bool`
   - **Default to:** `true`
 
@@ -101,9 +101,11 @@ int main(int argc, char* argv[]) {
         "name",				// Key with which you will access value
         true,				// true if the argument is required, false 
 					// otherwise. Default to false if nothing given
+
         Parser::STORE_ONE_VALUE,	// Type of stored argument
-        {"ain", "tea"},			// Values accepted for the flag.
-					// If not given, all values are considered correct
+        {"ain", "tea"},			// Values accepted for the flag,
+					// if not given, all values are considered correct
+
         "User name"			// Description of argument
     );
 
