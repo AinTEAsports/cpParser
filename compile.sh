@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 
 script_name="${1}"
@@ -34,27 +34,30 @@ function remove_extension {
 }
 
 
+# function compile_file {
+#         input_file=${1}
+#         output_file=${2}
+
+#         if [[ -z ${output_file} ]]; then
+#                 output_file="a.out"
+#         fi
+
+#         g++ "${input_file}" -lcpparser -I include -L lib -o "${output_file}"
+# }
+
+
 function compile_file {
         input_file=${1}
         output_file=${2}
 
-        if [[ -z ${output_file} ]]; then
-                output_file="a.out"
-        fi
+        [[ -z ${output_file} ]] && output_file="a.out"
 
-        g++ "${input_file}" -lcpparser -I include -L lib -o "${output_file}"
-}
+		files_to_compile="$(/bin/ls | grep ".cpp$" | grep -v "main.cpp" | tr '\n' ' ')"
 
-
-function compile_file {
-        input_file=${1}
-        output_file=${2}
-
-        if [[ -z ${output_file} ]]; then
-            output_file="a.out"
-        fi
-
-        g++ "${input_file}" -lcpparser -I include -L lib -o "${output_file}"
+        # g++ "${input_file}" -lcpparser -I include -L lib -o "${output_file}"
+		echo "[DEBUG] $files_to_compile"
+		# g++ "${input_file}" "$files_to_compile" -Iinclude -o "${output_file}"
+		g++ ./*.cpp -Iinclude -o "${output_file}"
 }
 
 

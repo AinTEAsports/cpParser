@@ -60,7 +60,7 @@ g++ <your_file> cpparser.cpp -Iinclude
 
 There are 4 argument types (`Default`  means the value when the argument is not called) :
 * `Parser::STORE_ONE_VALUE` :
-  - **Accessible by:** `args["<argname>"].String`
+  - **Accessible by:** `args["<argname>"].String` or `args["<argname>"]` (C++ will try to convert it to a string)
   - **Type:** `std::string`
   - **Default to:** `""`
 <br>
@@ -72,13 +72,13 @@ There are 4 argument types (`Default`  means the value when the argument is not 
 <br>
 
 * `Parser::STORE_TRUE`
-  - **Accessible by:** `args["<argname>"].Bool`
+  - **Accessible by:** `args["<argname>"].Bool` or `args["<argname>"]` (C++ will try to convert it to a boolean)
   - **Has type:** `bool`
   - **Default to:** `false`
 <br>
 
 * `Parser::STORE_FALSE`
-  - **Accessible by:** `args["<argname>"].Bool`
+  - **Accessible by:** `args["<argname>"].Bool` or `args["<argname>"]` (C++ will try to convert it to a boolean)
   - **Type:** `bool`
   - **Default to:** `true`
 
@@ -187,5 +187,5 @@ int main(int argc, char* argv[]) {
 
 
 # <a name="problems-section"></a> Problems
-If you had any problem with compiling/using the library, or if you have any suggestions, please contact `aintea` on <a href="https://discord.com">Discord</a>
+If you had any problem with compiling/using the library, or if you have any suggestions, please contact open a pull request
 
