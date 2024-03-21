@@ -7,6 +7,7 @@
 
 
 // TODO : do function documentation, class and constructor documentation
+// TODO : do what the comment above this one says
 
 
 // Due to some C++ restrictions (that are, I could say, part of the core of the language itself)

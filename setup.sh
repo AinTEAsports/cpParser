@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/use/bin/env bash
 
 NAME="cpparser"
 LIBRARY_NAME="lib${NAME}.a"
@@ -9,7 +9,7 @@ function compile_to_object_file {
 
 
 function link_object_files {
-    ar cr "${LIBRARY_NAME}" *.o
+    ar cr "${LIBRARY_NAME}" ./*.o
 }
 
 

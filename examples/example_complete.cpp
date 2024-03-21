@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
 
 #include "cpparser.hpp"
 
@@ -38,14 +37,13 @@ int main(int argc, char* argv[]) {
     );
 
     auto args = parser.parseArgs(argc, argv);
-
-
     std::vector<std::string> directories = args["dirs"];
-    
-    
+
+
     std::cout << "The action you choose was '" << std::string(args["action"]) << "'" << std::endl;
-    if (args["recursive"]) std::cout << "You choose 'recursive' option" <<std::endl;
-    
+
+    if (args["recursive"]) { std::cout << "You choose 'recursive' option" << std::endl; }
+
     std::cout << "Here are directories you wanted to check:" << std::endl;
     for (std::string dir: directories) {
         std::cout << dir << '\n';
