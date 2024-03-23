@@ -187,5 +187,5 @@ int main(int argc, char* argv[]) {
 
 
 # <a name="problems-section"></a> Problems
-If you had any problem with compiling/using the library, or if you have any suggestions, please contact open a pull request
+If you had any problem with compiling/using the library, or if you have any suggestions, please open an issue
 
