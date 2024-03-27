@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-
 script_name="${1}"
 run_script=0
 output_script_name=""
-
 
 function show_usage {
         echo -e "

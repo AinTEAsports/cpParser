@@ -111,8 +111,8 @@ int main(int argc, char* argv[]) {
 
     auto args = parser.parseArgs(argc, argv);
 
-    // args["name"] is printable directly, but to get the value you
-    // will need to write 'args["name"].String'
+    // the value is contained in `args["name"]` (c++ will convert it to the right type), but to enforce
+    // the type, `args["name"].String` is the way to go
     std::cout << "Your name is " << args["name"] << std::endl;
 
     return 0;
@@ -175,7 +175,7 @@ int main(int argc, char* argv[]) {
 
     auto args = parser.parseArgs(argc, argv);
 
-    if (args["ignorecase"].Bool == true) {
+    if (args["ignorecase"]) {
         std::cout << "'Ignore case' flag was given" << std::endl;
     } else {
         std::cout << "'Ignore case' flag was not given" << std::endl;
